@@ -5,7 +5,7 @@ import Posts from './components/Posts/Posts.tsx';
 import PostForm from './components/Form/PostForm.tsx';
 import {useAppDispatch} from './app/hooks.ts';
 import {PostMutation} from './types';
-import {createPost, fetchPosts} from './containers/postsThunks.ts';
+import {createPost, fetchPosts} from './containers/posts/postsThunks.ts';
 import PostInfo from './components/Posts/PostInfo.tsx';
 
 function App() {
