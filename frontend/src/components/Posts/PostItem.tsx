@@ -31,7 +31,7 @@ interface Props {
 
 const MessageItem: React.FC<Props> = ({id,header,content, image, datetime,onDelete}) => {
   const cardImage = apiURL + '/' + image || undefined;
-  const date = dayjs();
+  const date = dayjs(datetime);
   const formattedDate = date.format('YYYY-MM-DD HH:mm:ss');
 
   return (
