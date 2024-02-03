@@ -8,13 +8,13 @@ interface Props {
   onDelete: React.MouseEventHandler;
 }
 const CommentItem:React.FC<Props>  = ({id, author,description,onDelete}) => {
-
+  const cardAuthor = author || 'Anonymous';
   return (
     <Grid item>
       <Card sx={{height: '100%'}}>
         <CardContent title={id}>
           <strong>
-            {author} wrote: "{description}"
+            {cardAuthor} wrote: "{description}"
           </strong>
         </CardContent>
         <CardActions>
