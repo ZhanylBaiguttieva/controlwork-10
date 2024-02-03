@@ -36,3 +36,12 @@ export const deletePost = createAsyncThunk<void, string>(
     await axiosApi.delete('/news/' + postId);
   }
 );
+
+export const fetchOnePost = createAsyncThunk<Post | null, string> (
+  'posts/fetchOne',
+  async(postId) => {
+    const response = await axiosApi.get<Post>('/news/' + postId);
+    const post = response.data;
+    return post;
+  }
+);

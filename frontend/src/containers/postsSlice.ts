@@ -1,17 +1,21 @@
 import {Post} from '../types';
 import {RootState} from '../app/store.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {createPost, deletePost, fetchPosts} from './postsThunks.ts';
+import {createPost, deletePost, fetchOnePost, fetchPosts} from './postsThunks.ts';
 
 interface PostsState {
   items: Post[];
+  post: Post | null,
   fetchLoading: boolean;
+  fetchOneLoading: boolean;
   createLoading: boolean;
   deleteLoading: boolean;
 }
 const initialState: PostsState = {
   items: [],
+  post: null,
   fetchLoading: false,
+  fetchOneLoading: false,
   createLoading: false,
   deleteLoading: false,
 };
@@ -57,12 +61,27 @@ export const postsSlice = createSlice({
     builder.addCase(deletePost.rejected, (state) => {
       state.deleteLoading = false;
     });
+
+    builder.addCase(fetchOnePost.pending, (state) => {
+      state.fetchOneLoading = true;
+    });
+
+    builder.addCase(fetchOnePost.fulfilled, (state, {payload: post}) => {
+      state.fetchOneLoading = false;
+      state.post = post;
+    });
+
+    builder.addCase(fetchOnePost.rejected, (state) => {
+      state.fetchOneLoading = false;
+    });
   }
 });
 
 export const postsReducer = postsSlice.reducer;
 
 export const selectPosts = (state: RootState) => state.posts.items;
+export const selectPost = (state: RootState) => state.posts.post;
 
 export const selectFetchPostsLoading = (state: RootState) => state.posts.fetchLoading;
 export const selectPostCreating = (state: RootState) => state.posts.createLoading;
+export const selectFetchOnePostLoading = (state: RootState) => state.posts.fetchOneLoading;
