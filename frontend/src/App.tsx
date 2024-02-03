@@ -19,6 +19,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={(<Posts/>)} />
+        <Route path="/news" element={(<Posts/>)} />
         <Route path="/new-post" element={(<PostForm onSubmit={onFormSubmit}/>)} />
         <Route path="/news/:id" element={(<PostInfo/>)} />
       </Routes>
