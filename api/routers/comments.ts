@@ -4,18 +4,14 @@ import fileDb from "../fileDb";
 const commentsRouter = Router();
 commentsRouter.get('/', async (req, res)=>{
     try {
+        const news_id = req.query.news_id;
         const {comments} = await fileDb.getItems();
-        res.send(comments);
+        const commentArray = comments.filter(p => p.news_id === news_id);
+        res.send(commentArray);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
-});
-
-commentsRouter.get('/:id', async (req, res)=>{
-    const {comments} = await fileDb.getItems();
-    const comment  = comments.find(p => p.id === req.params.id);
-    res.send(comment);
 });
 
 commentsRouter.delete('/:id', async (req, res)=>{
@@ -23,17 +19,9 @@ commentsRouter.delete('/:id', async (req, res)=>{
     const comment_id = req.params.id;
     const indexToDelete = comments.findIndex(comment => comment.id === comment_id);
     if (indexToDelete !== -1) {
-        const commentToDelete = comments[indexToDelete];
-
-        const isMatchingNewsItem = news.some(newsItem =>commentToDelete.news_id === newsItem.id);
-
-        if (isMatchingNewsItem) {
-            res.status(400).send('Cannot delete comment, news_id is blinding');
-        } else {
-            comments.splice(indexToDelete, 1);
-            await fileDb.save();
-            res.send(comments);
-        }
+        comments.splice(indexToDelete,1);
+        await fileDb.save();
+        res.send(comments);
     } else {
         res.status(404).send('Comment not found');
     }
