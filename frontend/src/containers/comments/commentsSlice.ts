@@ -63,3 +63,5 @@ export const commentsSlice = createSlice({
 export const commentsReducer = commentsSlice.reducer;
 
 export const selectComments = (state: RootState) => state.comments.data;
+
+export const selectFetchCommentsLoading = (state: RootState) => state.comments.fetchLoading;
