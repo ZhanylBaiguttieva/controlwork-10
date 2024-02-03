@@ -47,7 +47,7 @@ export const commentsSlice = createSlice({
     });
 
     builder.addCase(deleteComment.pending, (state) => {
-      state.deleteLoading = true
+      state.deleteLoading = true;
     });
 
     builder.addCase(deleteComment.fulfilled, (state) => {

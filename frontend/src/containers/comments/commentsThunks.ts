@@ -1,11 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi.ts';
-import {Comment, CommentWithoutId} from '../../types';
+import {Comment, CommentMutation} from '../../types';
 
 export const fetchComments = createAsyncThunk(
   'comments/fetchAll',
-  async () => {
-    const commentsResponse = await axiosApi.get<Comment[] | null>('/comments');
+  async (news_id: string) => {
+    const commentsResponse = await axiosApi.get<Comment[] | null>('/comments?news_id=' + news_id);
     const comments =  commentsResponse.data;
 
     if (!comments) {
@@ -14,19 +14,10 @@ export const fetchComments = createAsyncThunk(
     return comments;
   });
 
-export const createComment = createAsyncThunk<null, CommentWithoutId>(
+export const createComment = createAsyncThunk<null, CommentMutation>(
   'comments/create',
   async (commentMutation) => {
-    const formData = new FormData();
-    const keys = Object.keys(commentMutation) as (keyof CommentWithoutId)[];
-    keys.forEach(key => {
-      const value = commentMutation[key];
-
-      if (value !== null) {
-        formData.append(key, value);
-      }
-    });
-    return axiosApi.post('/comments', formData);
+    await axiosApi.post('/comments', commentMutation);
   }
 );
 
