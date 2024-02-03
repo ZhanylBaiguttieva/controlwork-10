@@ -81,7 +81,3 @@ export const postsReducer = postsSlice.reducer;
 
 export const selectPosts = (state: RootState) => state.posts.items;
 export const selectPost = (state: RootState) => state.posts.post;
-
-export const selectFetchPostsLoading = (state: RootState) => state.posts.fetchLoading;
-export const selectPostCreating = (state: RootState) => state.posts.createLoading;
-export const selectFetchOnePostLoading = (state: RootState) => state.posts.fetchOneLoading;
