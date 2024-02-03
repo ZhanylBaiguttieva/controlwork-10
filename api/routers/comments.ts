@@ -19,18 +19,25 @@ commentsRouter.get('/:id', async (req, res)=>{
 });
 
 commentsRouter.delete('/:id', async (req, res)=>{
-    const {comments} = await fileDb.getItems();
+    const {comments, news} = await fileDb.getItems();
     const comment_id = req.params.id;
-    const idToDelete = comments.findIndex(comment => comment.id === comment_id);
-    if (idToDelete !== -1) {
-        comments.splice(idToDelete,1);
-        await fileDb.save();
-        res.send(comments);
+    const indexToDelete = comments.findIndex(comment => comment.id === comment_id);
+    if (indexToDelete !== -1) {
+        const commentToDelete = comments[indexToDelete];
+
+        const isMatchingNewsItem = news.some(newsItem =>commentToDelete.news_id === newsItem.id);
+
+        if (isMatchingNewsItem) {
+            res.status(400).send('Cannot delete comment, news_id is blinding');
+        } else {
+            comments.splice(indexToDelete, 1);
+            await fileDb.save();
+            res.send(comments);
+        }
     } else {
-        res.status(404).send('News not found');
+        res.status(404).send('Comment not found');
     }
 });
-
 commentsRouter.post('/', async(req, res)=>{
 
     if(req.body.news_id && req.body.description) {

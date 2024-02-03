@@ -22,9 +22,9 @@ newsRouter.get('/:id', async (req, res)=>{
 newsRouter.delete('/:id', async (req, res)=>{
     const {news} = await fileDb.getItems();
     const news_id = req.params.id;
-    const idToDelete = news.findIndex(newsItem => newsItem.id === news_id);
-    if (idToDelete !== -1) {
-        news.splice(idToDelete,1);
+    const indexToDelete = news.findIndex(newsItem => newsItem.id === news_id);
+    if (indexToDelete !== -1) {
+        news.splice(indexToDelete,1);
         await fileDb.save();
         res.send(news);
     } else {
