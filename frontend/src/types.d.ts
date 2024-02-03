@@ -19,3 +19,9 @@ export interface Comment {
   description: string;
 }
 export type CommentWithoutId = Omit<Comment, 'id'>;
+
+export interface CommentMutation {
+  news_id: string;
+  author: string;
+  description: string;
+}
