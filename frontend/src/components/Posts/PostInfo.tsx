@@ -4,11 +4,14 @@ import {selectPost} from '../../containers/posts/postsSlice.ts';
 import React, {useEffect} from 'react';
 import {fetchOnePost} from '../../containers/posts/postsThunks.ts';
 import {Card, CardContent, CardHeader, Grid} from '@mui/material';
+import Comments from '../Comments/Comments.tsx';
+import {selectFetchCommentsLoading} from '../../containers/comments/commentsSlice.ts';
 
 const PostInfo = () => {
   const {id} = useParams() as {id: string};
   const dispatch = useAppDispatch();
   const post = useAppSelector(selectPost);
+  const fetchCommentsLoading = useAppSelector(selectFetchCommentsLoading);
 
   useEffect(() => {
     dispatch(fetchOnePost(id));
@@ -30,10 +33,13 @@ const PostInfo = () => {
   }
 
   return (
-    <Grid item xs={6} sm={4} md={3}>
-      <Card sx={{height: '100%'}}>
-        {postInfo}
-      </Card>
+    <Grid>
+      <Grid container spacing={2}>
+        <Card sx={{height: '100%'}}>
+          {postInfo}
+        </Card>
+      </Grid>
+      <Comments isLoading={fetchCommentsLoading}/>
     </Grid>
   );
 };
