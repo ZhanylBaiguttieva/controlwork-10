@@ -6,6 +6,9 @@ import {fetchOnePost} from '../../containers/posts/postsThunks.ts';
 import {Card, CardContent, CardHeader, Grid} from '@mui/material';
 import Comments from '../Comments/Comments.tsx';
 import {selectFetchCommentsLoading} from '../../containers/comments/commentsSlice.ts';
+import CommentForm from '../Comments/Form/CommentForm.tsx';
+import {CommentMutation} from '../../types';
+import {createComment, fetchComments} from '../../containers/comments/commentsThunks.ts';
 
 const PostInfo = () => {
   const {id} = useParams() as {id: string};
@@ -16,6 +19,11 @@ const PostInfo = () => {
   useEffect(() => {
     dispatch(fetchOnePost(id));
   }, [dispatch, id]);
+
+  const onFormSubmit = async (commentMutation: CommentMutation) => {
+    await dispatch(createComment(commentMutation));
+    await dispatch(fetchComments(id));
+  };
 
   let postInfo: React.ReactNode;
   if(post) {
@@ -39,7 +47,12 @@ const PostInfo = () => {
           {postInfo}
         </Card>
       </Grid>
-      <Comments isLoading={fetchCommentsLoading}/>
+      <Grid item>
+        <Comments isLoading={fetchCommentsLoading}/>
+      </Grid>
+      <Grid>
+        <CommentForm onSubmit={onFormSubmit}/>
+      </Grid>
     </Grid>
   );
 };
