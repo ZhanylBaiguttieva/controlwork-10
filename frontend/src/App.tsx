@@ -6,6 +6,7 @@ import PostForm from './components/Form/PostForm.tsx';
 import {useAppDispatch} from './app/hooks.ts';
 import {PostMutation} from './types';
 import {createPost, fetchPosts} from './containers/postsThunks.ts';
+import PostInfo from './components/Posts/PostInfo.tsx';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={(<Posts/>)} />
         <Route path="/new-post" element={(<PostForm onSubmit={onFormSubmit}/>)} />
+        <Route path="/news/:id" element={(<PostInfo/>)} />
       </Routes>
     </>
   );
