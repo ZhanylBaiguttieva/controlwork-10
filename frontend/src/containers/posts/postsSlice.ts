@@ -1,5 +1,5 @@
-import {Post} from '../types';
-import {RootState} from '../app/store.ts';
+import {Post} from '../../types';
+import {RootState} from '../../app/store.ts';
 import {createSlice} from '@reduxjs/toolkit';
 import {createPost, deletePost, fetchOnePost, fetchPosts} from './postsThunks.ts';
 

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axiosApi from '../axiosApi.ts';
-import {Post, PostMutation} from '../types';
+import axiosApi from '../../axiosApi.ts';
+import {Post, PostMutation} from '../../types';
 
 export const fetchPosts = createAsyncThunk(
   'posts/fetchAll',
