@@ -18,3 +18,4 @@ export interface Comment {
   author: string | null;
   description: string;
 }
+export type CommentWithoutId = Omit<Comment, 'id'>;
