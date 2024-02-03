@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import {apiURL} from '../../constants.ts';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import dayjs from 'dayjs';
 
 const ImageCardMedia = styled(CardMedia) ({
   height: 0,
@@ -30,6 +31,8 @@ interface Props {
 
 const MessageItem: React.FC<Props> = ({id,header,content, image, datetime,onDelete}) => {
   const cardImage = apiURL + '/' + image || undefined;
+  const date = dayjs();
+  const formattedDate = date.format('YYYY-MM-DD HH:mm:ss');
 
   return (
     <Grid item xs={6} sm={4} md={3}>
@@ -40,7 +43,7 @@ const MessageItem: React.FC<Props> = ({id,header,content, image, datetime,onDele
           <strong>
             {content}
           </strong>
-          Posted on: {datetime}
+          Posted on: {formattedDate}
         </CardContent>
         <CardActions>
           <IconButton component={Link} href={'/news/' + id}>
