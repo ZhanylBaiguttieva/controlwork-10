@@ -10,7 +10,6 @@ export interface PostMutation {
   header: string;
   content: string;
   image: File | null;
-  datetime: string;
 }
 
 export interface Comment {
