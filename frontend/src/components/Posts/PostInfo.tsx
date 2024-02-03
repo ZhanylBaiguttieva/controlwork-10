@@ -1,8 +1,8 @@
 import {useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
-import {selectPost} from '../../containers/postsSlice.ts';
+import {selectPost} from '../../containers/posts/postsSlice.ts';
 import React, {useEffect} from 'react';
-import {fetchOnePost} from '../../containers/postsThunks.ts';
+import {fetchOnePost} from '../../containers/posts/postsThunks.ts';
 import {Card, CardContent, CardHeader, Grid} from '@mui/material';
 
 const PostInfo = () => {

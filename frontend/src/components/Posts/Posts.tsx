@@ -2,9 +2,9 @@
 import {Button, Grid, Link, Typography} from '@mui/material';
 import PostItem from './PostItem.tsx';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
-import {selectPosts} from '../../containers/postsSlice.ts';
+import {selectPosts} from '../../containers/posts/postsSlice.ts';
 import {useEffect} from 'react';
-import {deletePost, fetchPosts} from '../../containers/postsThunks.ts';
+import {deletePost, fetchPosts} from '../../containers/posts/postsThunks.ts';
 
 
 const Posts = () => {
