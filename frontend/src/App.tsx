@@ -1,7 +1,7 @@
 
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import News from './components/News.tsx';
+import Posts from './components/Posts.tsx';
 import PostForm from './components/Form/PostForm.tsx';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={(<News/>)} />
+        <Route path="/" element={(<Posts/>)} />
         <Route path="/new-post" element={(<PostForm/>)} />
       </Routes>
     </>
