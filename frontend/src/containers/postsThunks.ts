@@ -5,7 +5,7 @@ import {Post, PostMutation} from '../types';
 export const fetchPosts = createAsyncThunk(
   'posts/fetchAll',
   async () => {
-    const postsResponse = await axiosApi.get<Post[] | null>('/posts');
+    const postsResponse = await axiosApi.get<Post[] | null>('/news');
     const posts =  postsResponse.data;
 
     if (!posts) {
@@ -26,6 +26,13 @@ export const createPost = createAsyncThunk<null, PostMutation>(
         formData.append(key, value);
       }
     });
-    return axiosApi.post('/posts', formData);
+    return axiosApi.post('/news', formData);
+  }
+);
+
+export const deletePost = createAsyncThunk<void, string>(
+  'posts/delete',
+  async (postId) => {
+    await axiosApi.delete('/news/' + postId);
   }
 );

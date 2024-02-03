@@ -1,7 +1,7 @@
 
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import Posts from './components/Posts.tsx';
+import Posts from './components/Posts/Posts.tsx';
 import PostForm from './components/Form/PostForm.tsx';
 
 function App() {

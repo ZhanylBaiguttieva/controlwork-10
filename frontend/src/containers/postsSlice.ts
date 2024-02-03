@@ -1,17 +1,19 @@
 import {Post} from '../types';
 import {RootState} from '../app/store.ts';
 import {createSlice} from '@reduxjs/toolkit';
-import {createPost, fetchPosts} from './postsThunks.ts';
+import {createPost, deletePost, fetchPosts} from './postsThunks.ts';
 
 interface PostsState {
   items: Post[];
   fetchLoading: boolean;
   createLoading: boolean;
+  deleteLoading: boolean;
 }
 const initialState: PostsState = {
   items: [],
   fetchLoading: false,
   createLoading: false,
+  deleteLoading: false,
 };
 
 export const postsSlice = createSlice({
@@ -42,6 +44,18 @@ export const postsSlice = createSlice({
 
     builder.addCase(createPost.rejected, (state) => {
       state.createLoading = false;
+    });
+
+    builder.addCase(deletePost.pending, (state) => {
+      state.deleteLoading = true
+    });
+
+    builder.addCase(deletePost.fulfilled, (state) => {
+      state.deleteLoading = false;
+    });
+
+    builder.addCase(deletePost.rejected, (state) => {
+      state.deleteLoading = false;
     });
   }
 });
